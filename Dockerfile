@@ -5,7 +5,8 @@ FROM php:8.1-fpm-alpine AS laravel_build
 
 RUN apk update && apk add \
     curl git build-base libxml2-dev sqlite-dev zip unzip \
-    nodejs npm libpng-dev libjpeg-turbo-dev freetype-dev
+    nodejs npm libpng-dev libjpeg-turbo-dev freetype-dev \
+    postgresql-dev
 
 # Instalar extensiones necesarias para Laravel + PostgreSQL
 RUN docker-php-ext-configure gd \
@@ -38,7 +39,8 @@ RUN npm run build
 # --------------------------------------------------------------------------
 FROM php:8.1-fpm-alpine AS final
 
-RUN apk add --no-cache nginx libpng-dev libjpeg-turbo-dev freetype-dev build-base libxml2-dev sqlite-dev zip unzip
+RUN apk add --no-cache nginx libpng-dev libjpeg-turbo-dev freetype-dev \
+    build-base libxml2-dev sqlite-dev zip unzip postgresql-dev
 
 # Extensiones PHP para producción
 RUN docker-php-ext-configure gd \
@@ -62,4 +64,4 @@ USER appuser
 EXPOSE 80
 EXPOSE 9000
 
-CMD sh -c "php-fpm -D && nginx -g 'daemon off;'"
+CMD sh -c "php-fpm -D && nginx -g 'daemon off;'"
