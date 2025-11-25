@@ -1,0 +1,21 @@
+Excluir directorios de versionado y configuración
+
+.git
+.gitignore
+.env
+.idea
+vendor
+node_modules
+.vscode
+
+Excluir logs y temporales de Laravel
+
+storage/.bak
+storage/logs/
+
+Excluir directorios y archivos de Docker
+
+Dockerfile
+docker-compose.yml
+docker
+.dockerignore

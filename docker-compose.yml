@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        UID: ${UID:-1000}
+
+    container_name: laravel_app
+
+    ports:
+      - "8080:80"
+
+    volumes:
+      - .:/var/www
+      - ./storage:/var/www/storage
+      - ./bootstrap/cache:/var/www/bootstrap/cache
+
+    environment:
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: heladeria
+      DB_USERNAME: heladeria
+      DB_PASSWORD: secret
+
+      REDIS_HOST: redis
+
+    depends_on:
+      - postgres
+      - redis
+
+    restart: always
+
+
+  postgres:
+    image: postgres:15
+    container_name: laravel_postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: heladeria_3pue
+      POSTGRES_USER: heladeria
+      POSTGRES_PASSWORD: gyRCxyHzNtYiTXQxIa6cZKwCxIqRyyJV
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    restart: always
+
+
+  redis:
+    image: redis:alpine
+    container_name: laravel_redis
+    ports:
+      - "63790:6379"
+    restart: always
+
+volumes:
+  pg_data:
+    driver:local
