@@ -50,7 +50,7 @@ WORKDIR /var/www
 COPY --from=laravel_build /var/www /var/www
 
 # Copiar configuración Nginx
-COPY ./docker/nginx/nginx.conf /etc/nginx/http.d/default.conf
+COPY ./nginx.conf /etc/nginx/http.d/default.conf
 
 RUN mkdir -p /run/nginx && \
     chown -R appuser:appuser /var/www /var/lib/nginx /var/log/nginx /var/tmp/nginx
