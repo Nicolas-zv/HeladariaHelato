@@ -57,6 +57,7 @@ services:
       - "63790:6379"
     restart: always
 
+
 volumes:
   pg_data:
-    driver:local
+    driver: local
