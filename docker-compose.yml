@@ -23,9 +23,9 @@ services:
       DB_CONNECTION: pgsql
       DB_HOST: postgres
       DB_PORT: 5432
-      DB_DATABASE: heladeria
+      DB_DATABASE: heladeria_3pue
       DB_USERNAME: heladeria
-      DB_PASSWORD: secret
+      DB_PASSWORD: gyRCxyHzNtYiTXQxIa6cZKwCxIqRyyJV
 
       REDIS_HOST: redis
 
